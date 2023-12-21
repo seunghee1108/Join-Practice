@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="root">
+      <form id="myForm">
+        <label for="ID">ID</label>
+        <input id="ID" type="text" />
+        <input type="button" value="입력" onclick="submitForm()" />
+      </form>
+    </div>
+    <script>
+      function submitForm() {
+        const idValue = document.getElementById('ID').value;
+        const formData = new FormData();
+        formData.append('ID', idValue);
+        fetch('/login', {
+          method: 'POST',
+          body: formData,
+        })
+          .then(response => response.text())
+          .then(data => {
+            console.log(data);
+            // 여기에서 서버로부터 받은 응답에 따라 필요한 처리를 수행합니다.
+          })
+          .catch(error => {
+            console.error('Error:', error);
+          });
+      }
+    </script>
+  </body>
+</html>
